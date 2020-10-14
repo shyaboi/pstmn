@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from '../src/components/Navbar/index'
 import { Dropdown, SplitButton, ButtonGroup, Container } from "react-bootstrap";
-function App() {
+
+var globalThing = 'benis'
+
+
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {picked: "Method"};
+  }
+  handleClick(positionClicked) {
+    this.state.picked = positionClicked
+    console.log(this.state.picked+" was picked")
+    console.log('this is:', globalThing, positionClicked);
+    this.setState(this.state)
+  }
+  render() {
+    // const thing = globalThing;
   return (
     <Container>
       <Navbar />
@@ -18,13 +35,15 @@ function App() {
                 key={idx}
                 id={`dropdown-button-drop-${idx}`}
                 size="lg"
-                title="Method"
-              >
-                <Dropdown.Item eventKey="1">Post</Dropdown.Item>
-                <Dropdown.Item eventKey="2">Get</Dropdown.Item>
-                <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+                title={this.state.picked}
+                >
+
+                
+                <Dropdown.Item eventKey="Post" onClick={() => this.handleClick("Post")}>Post</Dropdown.Item>
+                <Dropdown.Item eventKey="Get" onClick={() => this.handleClick("Get")}>Get</Dropdown.Item>
+                <Dropdown.Item eventKey="3" onClick={() => this.handleClick("Another Thing")}>Something else here</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+                <Dropdown.Item eventKey="4" onClick={() => this.handleClick(4)}>Separated link</Dropdown.Item>
               </DropdownType>
             ))}
           </div>
@@ -35,5 +54,5 @@ function App() {
 
   );
 }
-
+}
 export default App;
