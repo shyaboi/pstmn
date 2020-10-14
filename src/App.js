@@ -3,14 +3,8 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../src/components/Navbar/index";
 import Main from '../src/pages/main/index'
+
 import {
-  Button,
-  FormControl,
-  InputGroup,
-  Form,
-  Dropdown,
-  SplitButton,
-  ButtonGroup,
   Container,
   Row,
   Col,
