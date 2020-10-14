@@ -7,6 +7,7 @@ import {
   InputGroup,
   Form,
   Dropdown,
+  Button,
   SplitButton,
   ButtonGroup,
   Container,
@@ -35,25 +36,25 @@ class Main extends React.Component {
     this.setState({url: e.target.value});
     console.log(this.state.url)
  }
-  getData = () => {
-    // create a new XMLHttpRequest
-    var xhr = new XMLHttpRequest();
-
-    // get a callback when the server responds
-    xhr.addEventListener("load", () => {
-      // update the state of the component with the result here
-    //   console.log(xhr.responseText);
-      console.log(JSON.parse(xhr.response));
-        let res = JSON.parse(xhr.response)
-        console.log()
-      const dinus = xhr.responseText;
-    //   console.log(dinus);
-      this.setState({ response: dinus });
+ getData = (muhData) => {
+   // create a new XMLHttpRequest
+   var xhr = new XMLHttpRequest();
+   // get a callback when the server responds
+   xhr.addEventListener("load", () => {
+     // update the state of the component with the result here
+     //   console.log(xhr.responseText);
+     // console.log(JSON.parse(xhr.response));
+     // let res = JSON.parse(xhr.response)
+     const dinus = xhr.responseText;
+     //   console.log(dinus);
+     this.setState({ response: dinus });
     });
+    muhData = this.state
+      console.log(muhData)
     // open the request with the verb and the url
     xhr.open(this.state.picked, this.state.url);
     // send the request
-    xhr.send();
+    xhr.send(muhData);
   };
 
   render() {
@@ -109,7 +110,7 @@ class Main extends React.Component {
               </InputGroup>
             </Col>
             <Col md={1}>
-              <input type="submit" value="Submit" onClick={this.getData} />
+              <Button type="submit" value="Submit" size="lg" onClick={this.getData} >Submit</Button>
             </Col>
           </Row>
         </Container>

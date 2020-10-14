@@ -17,7 +17,7 @@ function Nav() {
               height="30"
               className="d-inline-block align-top"
             />{" "}
-            Pstmn
+            Getwoman
           </Navbar.Brand>
         </Col>
         <Togg />
