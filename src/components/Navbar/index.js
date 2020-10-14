@@ -13,7 +13,7 @@ function Nav() {
         height="30"
         className="d-inline-block align-top"
       />{' '}
-      Postmn
+      Pstmn
     </Navbar.Brand>
   </Navbar>
     )}
