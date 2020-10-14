@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from '../src/components/Navbar/index'
-import { Dropdown, SplitButton, ButtonGroup, Container } from "react-bootstrap";
+import { Form, Dropdown, SplitButton, ButtonGroup, Container } from "react-bootstrap";
 
 var globalThing = 'benis'
 
@@ -11,7 +11,7 @@ var globalThing = 'benis'
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {picked: "Method"};
+    this.state = {picked: "Method", body: "{someExampleJSON:morjson}"};
   }
   handleClick(positionClicked) {
     this.state.picked = positionClicked
@@ -48,6 +48,20 @@ class App extends React.Component {
             ))}
           </div>
         </header>
+      </div>
+    </Container>
+    <Container>
+      <div>
+      <Form.Group controlId="exampleForm.ControlTextarea1">
+    <Form.Label><h1>Enter JSON body</h1></Form.Label>
+    <Form.Control as="textarea" rows="3" placeholder={this.state.body} />
+  </Form.Group>
+      
+      </div>
+    </Container>
+    <Container>
+      <div>
+        <h1>Response From Server</h1>
       </div>
     </Container>
     </Container>
