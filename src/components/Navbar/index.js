@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar"
-import ha from  '../../images/ha.png'
+import logo from  '../../images/logosml.png'
 
 function Nav() {
     return (
@@ -8,7 +8,7 @@ function Nav() {
     <Navbar.Brand href="#home">
       <img
         alt=""
-        src={ha}
+        src={logo}
         width="30"
         height="30"
         className="d-inline-block align-top"
