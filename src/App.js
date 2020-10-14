@@ -6,8 +6,8 @@ import Main from '../src/pages/main/index'
 
 import {
   Container,
-  Row,
-  Col,
+  // Row,
+  // Col,
 } from "react-bootstrap";
 
 class App extends React.Component {
@@ -26,6 +26,7 @@ class App extends React.Component {
     return (
       <Container fluid>
         <Navbar />
+        <br />
        <Main />
       </Container>
     );

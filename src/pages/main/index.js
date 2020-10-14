@@ -2,7 +2,7 @@ import React from "react";
 import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
-  Button,
+    Jumbotron,
   FormControl,
   InputGroup,
   Form,
@@ -17,7 +17,12 @@ import {
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { picked: "Method", body: "{someExampleJSON:morjson}" };
+    this.state = {
+      picked: "Method",
+      body: "{someExampleJSON:morjson}",
+      response: "{example:JSON}",
+      url: "https://openflags.net/rando"
+    };
   }
   handleClick(positionClicked) {
     // this.state.picked = positionClicked;
@@ -25,6 +30,32 @@ class Main extends React.Component {
     // console.log("this is:", globalThing, positionClicked);
     this.setState({ picked: positionClicked });
   }
+
+  urlChange = (e) => {
+    this.setState({url: e.target.value});
+    console.log(this.state.url)
+ }
+  getData = () => {
+    // create a new XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+
+    // get a callback when the server responds
+    xhr.addEventListener("load", () => {
+      // update the state of the component with the result here
+    //   console.log(xhr.responseText);
+      console.log(JSON.parse(xhr.response));
+        let res = JSON.parse(xhr.response)
+        console.log()
+      const dinus = xhr.responseText;
+    //   console.log(dinus);
+      this.setState({ response: dinus });
+    });
+    // open the request with the verb and the url
+    xhr.open(this.state.picked, this.state.url);
+    // send the request
+    xhr.send();
+  };
+
   render() {
     // const thing = globalThing;
     return (
@@ -68,13 +99,17 @@ class Main extends React.Component {
                     URL to {this.state.picked} https://openflags.net/rando
                   </InputGroup.Text>
                 </InputGroup.Prepend>
-                <FormControl id="basic-url" aria-describedby="basic-addon3" />
+                <FormControl
+                  id="basic-url"
+                  aria-describedby="basic-addon3"
+                  placeholder="https://openflags.net/rando"
+                  defaultValue=''
+                  onChange={this.urlChange} 
+                />
               </InputGroup>
             </Col>
             <Col md={1}>
-              <Button variant="primary" type="submit" size="lg">
-                Submit
-              </Button>
+              <input type="submit" value="Submit" onClick={this.getData} />
             </Col>
           </Row>
         </Container>
@@ -90,10 +125,18 @@ class Main extends React.Component {
             />
           </Form.Group>
         </Container>
+        <br />
 
         <Container>
           <div>
+            <Jumbotron fluid id='jumbo'>
+              <Container>
             <h1>Response From Server</h1>
+                <p>
+                  {this.state.response}
+                </p>
+              </Container>
+            </Jumbotron>
           </div>
         </Container>
       </Container>

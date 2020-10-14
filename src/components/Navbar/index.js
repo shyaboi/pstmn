@@ -2,7 +2,8 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../../images/logosml.png";
 import Togg from "../../components/LightDarkToggleSwitch/index";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Col } from "react-bootstrap";
+
 function Nav() {
   return (
     <Container fluid>
