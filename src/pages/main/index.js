@@ -20,7 +20,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       picked: "Method",
-      body: "{someExampleJSON:morjson}",
+      body: '{"someExampleJSON":"morjson"}',
       response: "{example:JSON}",
       url: "https://openflags.net/rando"
     };

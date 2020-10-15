@@ -52,6 +52,10 @@ app.post("/", function (req, res) {
 const urlToParse = req.body.body.url
   if (meth === "POST") {
     console.log("postn'")
+    
+    if (bod == "{someExampleJSON:morjson}"){
+      console.log('need a bod bud')
+    }
     const postBody = JSON.parse(bod);
 
     const data = JSON.stringify({
@@ -75,22 +79,22 @@ const urlToParse = req.body.body.url
   
   const req = https.request(options, (res) => {
       let data = '';
-  
+  const writeIt = (res)=> {res.json({ok:'your request 404d, please check your url or method'})}
       console.log('Status Code:', res.statusCode);
-  
+      
       res.on('data', (chunk) => {
-          data += chunk;
+        data += chunk;
       });
-  
+      
       res.on('end', () => {
-          console.log('Body: ', JSON.parse(bod));
+        console.log('Body: ', JSON.parse(bod));
       });
-  
-  }).on("error", (err) => {
+      
+    }).on("error", (err) => {
       console.log("Error: ", err.message);
-  });
-  
-  req.write(bod);
+    });
+    
+    req.write(bod);
   res.json(JSON.parse(bod));
   req.end();
   }
