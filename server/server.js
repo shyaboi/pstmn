@@ -1,39 +1,102 @@
-const express = require('express')
-const app = express()
-const port = 3333
-var bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(function(req, res, next) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-// parse application/json
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json())
-app.get('/', function (req, res) {
-  res.json({hi:"thisd is a JSON"})
-})
-app.post('/', function (req, res) {
-  console.log(req.body.body)
-  const https = require('https');
-https.get(req.body.body.url, (resp) => {
-  let data = '';
-  resp.on('data', (chunk) => {
-    data += chunk;
-    console.log(data)
-  });
-  resp.on('end', () => {
-    const resJson = JSON.parse(data)
-    res.json(resJson)
-  });
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
+const express = require("express");
+const app = express();
+const port = 3333;
+const https = require("https");
+const http = require("http");
+
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
 });
+// parse application/json
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+
+app.get("/", function (req, res) {
+  res.json({ hi: "thisd is a JSON" });
+});
+// main post route for receiving react data
+app.post("/", function (req, res) {
+  const meth = req.body.body.picked;
+  const bod = req.body.body.body;
+  // http get if the incoming method is a get
+
+  if (meth === "GET") {
+    console.log("gettin")
+    https
+      .get(req.body.body.url, (resp) => {
+        let data = "";
+        resp.on("data", (chunk) => {
+          data += chunk;
+          console.log(data);
+        });
+        resp.on("end", () => {
+          const resJson = JSON.parse(data);
+          res.json(resJson);
+        });
+      })
+      .on("error", (err) => {
+        console.log("Error: " + err.message);
+      });
+  }
+  if (meth === "POST") {
+    console.log("postn'")
+    const postBody = JSON.parse(bod);
+
+    const data = JSON.stringify({
+      postBody
+  });
+  
+  const options = {
+      hostname: 'ptsv2.com',
+      path: '/t/jh84a-1602740677/post',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': bod.length
+      }
+  };
+  
+  
+  const req = https.request(options, (res) => {
+      let data = '';
+  
+      console.log('Status Code:', res.statusCode);
+  
+      res.on('data', (chunk) => {
+          data += chunk;
+      });
+  
+      res.on('end', () => {
+          console.log('Body: ', JSON.parse(bod));
+      });
+  
+  }).on("error", (err) => {
+      console.log("Error: ", err.message);
+  });
+  
+  req.write(bod);
+  req.end();
+  }
+});
+
+
+
+app.post("/past", function (req, res) {
+  console.log(req.body)
+  res.send(req.body)
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+  console.log(`Example app listening at http://localhost:${port}`);
+});
