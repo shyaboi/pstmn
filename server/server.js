@@ -13,11 +13,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json())
-// app.get('/', (req, res) => {
-//     console.log(req.body)
-//   res.json({thing:'Hello World!'})
-//   return 'hiwprl'
-// })
 app.get('/', function (req, res) {
   res.json({hi:"thisd is a JSON"})
 })
