@@ -32,10 +32,16 @@ class Main extends React.Component {
     this.setState({ picked: positionClicked });
   }
 
-  urlChange = (e) => {
+urlChange = (e) => {
     this.setState({url: e.target.value});
-    console.log(this.state.url)
+    // console.log(this.state.url)
  }
+ bodyChange = (e) => {
+  this.setState({body: e.target.value});
+  console.log(this.state.body)
+}
+
+
  getData = (muhData) => {
    // create a new XMLHttpRequest
    var xhr = new XMLHttpRequest();
@@ -45,18 +51,64 @@ class Main extends React.Component {
      //   console.log(xhr.responseText);
      // console.log(JSON.parse(xhr.response));
      // let res = JSON.parse(xhr.response)
-     const dinus = xhr.responseText;
+     const response = xhr.responseText;
      //   console.log(dinus);
-     this.setState({ response: dinus });
+     this.setState({ body: this.state.body });
+     this.setState({ response: response });
+
     });
-    muhData = this.state
-      console.log(muhData)
+    muhData = this.state.body
+    console.log(muhData)
     // open the request with the verb and the url
     xhr.open(this.state.picked, this.state.url);
     // send the request
-    xhr.send(muhData);
+    xhr.send();
   };
+  
+  postData = ()=> {
+    // Example POST method implementation:
+    this.setState({ body: this.state.body });
+    // const bod = this.state.body
+    // console.log(JSON.stringify(bod))
+    const meth = this.state.picked
+    console.log(meth)
+    async function postData(url = '', data = {}) {
+      // Default options are marked with *
+      const response = await fetch(url, {
+        method: meth, // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+      });
+      return response.json(); // parses JSON response into native JavaScript objects
+    }
 
+  
+    
+    postData('http://localhost:3333/', { body: this.state.body })
+    .then(data => {
+      var strang = JSON.stringify(data)
+      this.setState({ response: strang });
+      console.log(data); // JSON data parsed by `data.json()` call
+    });
+  }
+
+  theDecideor(){
+    const meth = this.state.picked
+    if (meth=="Post"||"POST") {
+      this.postData()
+      console.log('twas a post')
+    } else {
+      
+    }
+  }
   render() {
     // const thing = globalThing;
     return (
@@ -110,7 +162,7 @@ class Main extends React.Component {
               </InputGroup>
             </Col>
             <Col md={1}>
-              <Button type="submit" value="Submit" size="lg" onClick={this.getData} >Submit</Button>
+              <Button type="submit" value="Submit" size="lg" onClick={this.theDecideor} >Submit</Button>
             </Col>
           </Row>
         </Container>
@@ -123,6 +175,8 @@ class Main extends React.Component {
               as="textarea"
               rows="3"
               placeholder={this.state.body}
+              onChange={this.bodyChange} 
+
             />
           </Form.Group>
         </Container>

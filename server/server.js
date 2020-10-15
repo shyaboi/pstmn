@@ -9,11 +9,22 @@ app.use(function(req, res, next) {
     next();
   });
 // parse application/json
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json())
-app.get('/', (req, res) => {
-    console.log(req.body)
-  res.json({thing:'Hello World!'})
-  return 'hiwprl'
+// app.get('/', (req, res) => {
+//     console.log(req.body)
+//   res.json({thing:'Hello World!'})
+//   return 'hiwprl'
+// })
+app.get('/', function (req, res) {
+  res.json({hi:"thisd is a JSON"})
+})
+
+app.post('/', function (req, res) {
+  console.log(req.body)
+  res.json(req.body)
 })
 
 app.listen(port, () => {
