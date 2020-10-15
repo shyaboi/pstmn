@@ -63,11 +63,16 @@ const urlToParse = req.body.body.url
   });
 
   const url = new URL(urlToParse);
+  const urlPort = url.port
+  const protocol = url.protocol
   const host = url.hostname
   const path = url.pathname
+
+  console.log('proto: ' + protocol,'port: '+urlPort, `host: `+host, 'path'+path)
 // console.log(url.pathname)
   const options = {
       hostname: host,
+      port:urlPort,
       path: path,
       method: 'POST',
       headers: {
@@ -77,9 +82,9 @@ const urlToParse = req.body.body.url
   };
   
   
-  const req = https.request(options, (res) => {
+  const req = http.request(options, (res) => {
       let data = '';
-  const writeIt = (res)=> {res.json({ok:'your request 404d, please check your url or method'})}
+
       console.log('Status Code:', res.statusCode);
       
       res.on('data', (chunk) => {
