@@ -23,8 +23,8 @@ app.get('/', function (req, res) {
 })
 
 app.post('/', function (req, res) {
-  console.log(req.body)
-  res.json(req.body)
+  console.log(req.body.body)
+  res.json(req.body.body)
 })
 
 app.listen(port, () => {

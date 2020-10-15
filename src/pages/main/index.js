@@ -42,28 +42,28 @@ urlChange = (e) => {
 }
 
 
- getData = (muhData) => {
-   // create a new XMLHttpRequest
-   var xhr = new XMLHttpRequest();
-   // get a callback when the server responds
-   xhr.addEventListener("load", () => {
-     // update the state of the component with the result here
-     //   console.log(xhr.responseText);
-     // console.log(JSON.parse(xhr.response));
-     // let res = JSON.parse(xhr.response)
-     const response = xhr.responseText;
-     //   console.log(dinus);
-     this.setState({ body: this.state.body });
-     this.setState({ response: response });
+//  getData = (muhData) => {
+//    // create a new XMLHttpRequest
+//    var xhr = new XMLHttpRequest();
+//    // get a callback when the server responds
+//    xhr.addEventListener("load", () => {
+//      // update the state of the component with the result here
+//      //   console.log(xhr.responseText);
+//      // console.log(JSON.parse(xhr.response));
+//      // let res = JSON.parse(xhr.response)
+//      const response = xhr.responseText;
+//      //   console.log(dinus);
+//      this.setState({ body: this.state.body });
+//      this.setState({ response: response });
 
-    });
-    muhData = this.state.body
-    console.log(muhData)
-    // open the request with the verb and the url
-    xhr.open(this.state.picked, this.state.url);
-    // send the request
-    xhr.send();
-  };
+//     });
+//     muhData = this.state.body
+//     console.log(muhData)
+//     // open the request with the verb and the url
+//     xhr.open(this.state.picked, this.state.url);
+//     // send the request
+//     xhr.send();
+//   };
   
   postData = ()=> {
     // Example POST method implementation:
@@ -75,7 +75,7 @@ urlChange = (e) => {
     async function postData(url = '', data = {}) {
       // Default options are marked with *
       const response = await fetch(url, {
-        method: meth, // *GET, POST, PUT, DELETE, etc.
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, *same-origin, omit
@@ -92,7 +92,7 @@ urlChange = (e) => {
 
   
     
-    postData('http://localhost:3333/', { body: this.state.body })
+    postData('http://localhost:3333/', { body: this.state })
     .then(data => {
       var strang = JSON.stringify(data)
       this.setState({ response: strang });
@@ -100,15 +100,15 @@ urlChange = (e) => {
     });
   }
 
-  theDecideor(){
-    const meth = this.state.picked
-    if (meth=="Post"||"POST") {
-      this.postData()
-      console.log('twas a post')
-    } else {
+  // theDecideor(){
+  //   const meth = this.state.picked
+  //   if (meth=="Post"||"POST") {
+  //     this.postData()
+  //     console.log('twas a post')
+  //   } else {
       
-    }
-  }
+  //   }
+  // }
   render() {
     // const thing = globalThing;
     return (
@@ -162,7 +162,7 @@ urlChange = (e) => {
               </InputGroup>
             </Col>
             <Col md={1}>
-              <Button type="submit" value="Submit" size="lg" onClick={this.theDecideor} >Submit</Button>
+              <Button type="submit" value="Submit" size="lg" onClick={this.postData} >Submit</Button>
             </Col>
           </Row>
         </Container>
