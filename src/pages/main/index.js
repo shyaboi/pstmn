@@ -94,7 +94,7 @@ urlChange = (e) => {
     
     postData('http://localhost:3333/', { body: this.state })
     .then(data => {
-      var strang = JSON.stringify(data)
+      var strang = (<Container ><pre id='responseBox'>{JSON.stringify(data, null, 2) }</pre></Container>);
       this.setState({ response: strang });
       console.log(data); // JSON data parsed by `data.json()` call
     });
@@ -136,12 +136,12 @@ urlChange = (e) => {
                   >
                     Get
                   </Dropdown.Item>
-                  <Dropdown.Item
+                  {/* <Dropdown.Item
                     eventKey="PUT"
                     onClick={() => this.handleClick("PUT")}
                   >
                     Put
-                  </Dropdown.Item>
+                  </Dropdown.Item> */}
                 </DropdownType>
               ))}
             </Col>
@@ -149,7 +149,7 @@ urlChange = (e) => {
               <InputGroup className="mb-3" size="lg">
                 <InputGroup.Prepend>
                   <InputGroup.Text id="basic-addon3">
-                    URL to {this.state.picked} https://openflags.net/rando
+                    URL to {this.state.picked}
                   </InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
@@ -187,9 +187,9 @@ urlChange = (e) => {
             <Jumbotron fluid id='jumbo'>
               <Container>
             <h1>Response From Server</h1>
-                <p>
+                <Container>
                   {this.state.response}
-                </p>
+                </Container>
               </Container>
             </Jumbotron>
           </div>

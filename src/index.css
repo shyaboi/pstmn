@@ -4,7 +4,12 @@
   color: white;
 }
 #jumbo{
-  background: #4E4E4E;
+  background: #C5C5C5;
+}
+
+#responseBox
+{
+  color: black;
 }
 body {
   margin: 0;

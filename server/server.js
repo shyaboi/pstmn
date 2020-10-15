@@ -21,10 +21,22 @@ app.use(bodyParser.json())
 app.get('/', function (req, res) {
   res.json({hi:"thisd is a JSON"})
 })
-
 app.post('/', function (req, res) {
   console.log(req.body.body)
-  res.json(req.body.body)
+  const https = require('https');
+https.get(req.body.body.url, (resp) => {
+  let data = '';
+  resp.on('data', (chunk) => {
+    data += chunk;
+    console.log(data)
+  });
+  resp.on('end', () => {
+    const resJson = JSON.parse(data)
+    res.json(resJson)
+  });
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});
 })
 
 app.listen(port, () => {
