@@ -49,6 +49,7 @@ app.post("/", function (req, res) {
         console.log("Error: " + err.message);
       });
   }
+const urlToParse = req.body.body.url
   if (meth === "POST") {
     console.log("postn'")
     const postBody = JSON.parse(bod);
@@ -56,10 +57,14 @@ app.post("/", function (req, res) {
     const data = JSON.stringify({
       postBody
   });
-  
+
+  const url = new URL(urlToParse);
+  const host = url.hostname
+  const path = url.pathname
+// console.log(url.pathname)
   const options = {
-      hostname: 'ptsv2.com',
-      path: '/t/jh84a-1602740677/post',
+      hostname: host,
+      path: path,
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
@@ -86,6 +91,7 @@ app.post("/", function (req, res) {
   });
   
   req.write(bod);
+  res.json(JSON.parse(bod));
   req.end();
   }
 });
