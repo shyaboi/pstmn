@@ -94,8 +94,13 @@ urlChange = (e) => {
     
     postData('https://getwomanserver.herokuapp.com/', { body: this.state })
     .then(data => {
+      console.log(typeof(data))
+      if(typeof(data)==='string'){
+        var strang = JSON.stringify(data)
+      }
+      if(typeof(data)==='object'){
       var strang = <ReactJson src={data} />
-
+      }
       this.setState({ response: strang });
       console.log(data); // JSON data parsed by `data.json()` call
     });
