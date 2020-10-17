@@ -131,16 +131,16 @@ urlChange = (e) => {
                   title={this.state.picked}
                 >
                   <Dropdown.Item
-                    eventKey="POST"
-                    onClick={() => this.handleClick("POST")}
-                  >
-                    Post
-                  </Dropdown.Item>
-                  <Dropdown.Item
                     eventKey="GET"
                     onClick={() => this.handleClick("GET")}
                   >
                     Get
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="POST"
+                    onClick={() => this.handleClick("POST")}
+                  >
+                    Post
                   </Dropdown.Item>
                   {/* <Dropdown.Item
                     eventKey="PUT"
