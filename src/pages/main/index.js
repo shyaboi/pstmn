@@ -1,6 +1,8 @@
 import React from "react";
 import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ReactJson from 'react-json-view'
+
 import {
     Jumbotron,
   FormControl,
@@ -26,9 +28,7 @@ class Main extends React.Component {
     };
   }
   handleClick(positionClicked) {
-    // this.state.picked = positionClicked;
     // console.log(this.state.picked + " was picked");
-    // console.log("this is:", globalThing, positionClicked);
     this.setState({ picked: positionClicked });
   }
 
@@ -94,7 +94,8 @@ urlChange = (e) => {
     
     postData('http://localhost:3333/', { body: this.state })
     .then(data => {
-      var strang = (<Container ><pre id='responseBox'>{JSON.stringify(data, null, 2) }</pre></Container>);
+      var strang = <ReactJson src={data} />
+
       this.setState({ response: strang });
       console.log(data); // JSON data parsed by `data.json()` call
     });

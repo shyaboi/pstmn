@@ -3,6 +3,7 @@ const app = express();
 const port = 3333;
 const https = require("https");
 const http = require("http");
+const path = require('path')
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,10 +22,11 @@ app.use(
   })
   );
   app.use(bodyParser.json());
-  
-  app.get("/", function (req, res) {
-    res.json({ hi: "thisd is a JSON" });
-  });
+  app.use(express.static(path.join(__dirname, 'build')))
+
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build', 'index.html'))
+  })
   // main post route for receiving react data
   app.post("/", function (req, res) {
     // incoming url to parse
