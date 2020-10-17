@@ -16,16 +16,21 @@ class Togg extends Component {
   render() {
 const lightMode = ()=> {
   document.querySelector("#root").style.color = '#242424 ';
+  // document.querySelector("#responseBox").style.color = '#242424 ';
   document.querySelector("#root").style.background = '#F7F7F7';
   document.querySelector("html").style.background = '#F7F7F7';
-  document.querySelector("#jumbo").style.background = '#E0E0E0';
+  // document.querySelector("#jumbo").style.background = '#E0E0E0';
 }
 
 const darkMode = ()=> {
   document.querySelector("#root").style.color = '#FFFFFF';
   document.querySelector("#root").style.background = '#4E4E4E';
   document.querySelector("html").style.background = '#4E4E4E';
-
+  // if (document.querySelector('#responseBox')== !null) {
+  //   console.log('got the not nullyfe')
+  //   document.querySelector("#responseBox").style.color = '#242424 ';
+  // }
+  
 
   
   console.log('darkmode')}
