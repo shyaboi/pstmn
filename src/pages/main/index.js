@@ -25,7 +25,7 @@ class Main extends React.Component {
       body: '{"someExampleJSON":"morjson"}',
       responseType:"Example JSON",
       response: "{example:JSON}",
-      url: "https://openflags.net/rando"
+      url: "https://openflags.net/api/usa/california"
     };
   }
   handleClick(positionClicked) {
