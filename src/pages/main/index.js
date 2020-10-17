@@ -92,7 +92,7 @@ urlChange = (e) => {
 
   
     
-    postData('http://localhost:3333/', { body: this.state })
+    postData('https://getwomanserver.herokuapp.com/', { body: this.state })
     .then(data => {
       var strang = <ReactJson src={data} />
 

@@ -67,9 +67,6 @@ app.use(
     if (bod == "{someExampleJSON:morjson}") {
       console.log("need a bod bud");
     }
-    const postBody = JSON.parse(bod);
-
-    // console.log(url.pathname)
     const options = {
       hostname: host,
       port: urlPort,
