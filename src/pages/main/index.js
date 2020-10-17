@@ -16,7 +16,6 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import { CallPage } from "twilio/lib/rest/api/v2010/account/call";
 
 class Main extends React.Component {
   constructor(props) {
@@ -45,17 +44,6 @@ urlChange = (e) => {
 
 
 
-startTimer = ()=> {
-  let time = 0
-var  ok =  setInterval(() => {
-    time++
-    console.log(time)
-  }, 10);
-  setTimeout(() => {
-    clearInterval(ok)
-    
-  }, 2000);
-}
 
 //  getData = (muhData) => {
 //    // create a new XMLHttpRequest
@@ -81,6 +69,7 @@ var  ok =  setInterval(() => {
 //   };
   
   postData = ()=> {
+    console.time('init')
     // Example POST method implementation:
     this.setState({ body: this.state.body });
     // const bod = this.state.body
@@ -112,28 +101,22 @@ var  ok =  setInterval(() => {
       const dataType = typeof(data)
       if(typeof(data)==='string'){
         var strang = JSON.stringify(data)
+        this.setState({ response: strang });
       }
       if(typeof(data)==='object'){
-      var strang = <ReactJson src={data} />
+      var strangJSON = <ReactJson src={data} />
+      this.setState({ response: strangJSON });
+
       }
       this.setState({ responseType: dataType });
-      this.setState({ response: strang });
+      console.timeEnd('init')
 
-      console.log(data); // JSON data parsed by `data.json()` call
+      console.log(data);
     });
   }
 
-  // theDecideor(){
-  //   const meth = this.state.picked
-  //   if (meth=="Post"||"POST") {
-  //     this.postData()
-  //     console.log('twas a post')
-  //   } else {
-      
-  //   }
-  // }
+
   render() {
-    // const thing = globalThing;
     return (
       <Container fluid>
         <Container fluid>
@@ -185,7 +168,7 @@ var  ok =  setInterval(() => {
               </InputGroup>
             </Col>
             <Col md={1}>
-              <Button type="submit" value="Submit" size="lg" onClick={this.postData, this.startTimer} >Submit</Button>
+              <Button type="submit" value="Submit" size="lg" onClick={this.postData} >Submit</Button>
             </Col>
           </Row>
         </Container>
