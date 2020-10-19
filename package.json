@@ -16,7 +16,7 @@
   },
   "scripts": {
     "servstart": "cd server && npm start",
-    "start": "react-scripts start",
+    "start": "npm run servstart",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
