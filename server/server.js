@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3333;
+const port = process.env.PORT || 3333;
 const https = require("https");
 const http = require("http");
 const path = require('path')
