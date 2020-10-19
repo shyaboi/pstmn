@@ -23,8 +23,9 @@ class Main extends React.Component {
     this.state = {
       picked: "Method",
       body: '{"someExampleJSON":"morjson"}',
+      responseType:"Example JSON",
       response: "{example:JSON}",
-      url: "https://openflags.net/rando"
+      url: "https://openflags.net/api/usa/california"
     };
   }
   handleClick(positionClicked) {
@@ -40,6 +41,8 @@ urlChange = (e) => {
   this.setState({body: e.target.value});
   console.log(this.state.body)
 }
+
+
 
 
 //  getData = (muhData) => {
@@ -66,6 +69,7 @@ urlChange = (e) => {
 //   };
   
   postData = ()=> {
+    console.time('init')
     // Example POST method implementation:
     this.setState({ body: this.state.body });
     // const bod = this.state.body
@@ -92,26 +96,27 @@ urlChange = (e) => {
 
   
     
-    postData('http://localhost:3333/', { body: this.state })
+    postData('https://getwomanserver.herokuapp.com/', { body: this.state })
     .then(data => {
-      var strang = <ReactJson src={data} />
+      const dataType = typeof(data)
+      if(typeof(data)==='string'){
+        var strang = JSON.stringify(data)
+        this.setState({ response: strang });
+      }
+      if(typeof(data)==='object'){
+      var strangJSON = <ReactJson src={data} />
+      this.setState({ response: strangJSON });
 
-      this.setState({ response: strang });
-      console.log(data); // JSON data parsed by `data.json()` call
+      }
+      this.setState({ responseType: dataType });
+      console.timeEnd('init')
+
+      console.log(data);
     });
   }
 
-  // theDecideor(){
-  //   const meth = this.state.picked
-  //   if (meth=="Post"||"POST") {
-  //     this.postData()
-  //     console.log('twas a post')
-  //   } else {
-      
-  //   }
-  // }
+
   render() {
-    // const thing = globalThing;
     return (
       <Container fluid>
         <Container fluid>
@@ -126,16 +131,16 @@ urlChange = (e) => {
                   title={this.state.picked}
                 >
                   <Dropdown.Item
-                    eventKey="POST"
-                    onClick={() => this.handleClick("POST")}
-                  >
-                    Post
-                  </Dropdown.Item>
-                  <Dropdown.Item
                     eventKey="GET"
                     onClick={() => this.handleClick("GET")}
                   >
                     Get
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="POST"
+                    onClick={() => this.handleClick("POST")}
+                  >
+                    Post
                   </Dropdown.Item>
                   {/* <Dropdown.Item
                     eventKey="PUT"
@@ -156,7 +161,7 @@ urlChange = (e) => {
                 <FormControl
                   id="basic-url"
                   aria-describedby="basic-addon3"
-                  placeholder="https://openflags.net/rando"
+                  placeholder="https://openflags.net/api/usa/california"
                   defaultValue=''
                   onChange={this.urlChange} 
                 />
@@ -188,6 +193,9 @@ urlChange = (e) => {
             <Jumbotron fluid id='jumbo'>
               <Container>
             <h1>Response From Server</h1>
+            <h2>
+              {this.state.responseType}
+            </h2>
                 <Container>
                   {this.state.response}
                 </Container>

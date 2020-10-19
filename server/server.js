@@ -25,7 +25,7 @@ app.use(
   app.use(express.static(path.join(__dirname, 'build')))
 
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build', 'index.html'))
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
   })
   // main post route for receiving react data
   app.post("/", function (req, res) {
@@ -67,9 +67,6 @@ app.use(
     if (bod == "{someExampleJSON:morjson}") {
       console.log("need a bod bud");
     }
-    const postBody = JSON.parse(bod);
-
-    // console.log(url.pathname)
     const options = {
       hostname: host,
       port: urlPort,

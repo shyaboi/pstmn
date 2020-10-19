@@ -13,14 +13,8 @@ import {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { picked: "Method", body: "{someExampleJSON:morjson}" };
   }
-  handleClick(positionClicked) {
-    // this.state.picked = positionClicked;
-    // console.log(this.state.picked + " was picked");
-    // console.log("this is:", globalThing, positionClicked);
-    this.setState({ picked: positionClicked });
-  }
+
   render() {
     // const thing = globalThing;
     return (
