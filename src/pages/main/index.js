@@ -42,32 +42,6 @@ urlChange = (e) => {
   console.log(this.state.body)
 }
 
-
-
-
-//  getData = (muhData) => {
-//    // create a new XMLHttpRequest
-//    var xhr = new XMLHttpRequest();
-//    // get a callback when the server responds
-//    xhr.addEventListener("load", () => {
-//      // update the state of the component with the result here
-//      //   console.log(xhr.responseText);
-//      // console.log(JSON.parse(xhr.response));
-//      // let res = JSON.parse(xhr.response)
-//      const response = xhr.responseText;
-//      //   console.log(dinus);
-//      this.setState({ body: this.state.body });
-//      this.setState({ response: response });
-
-//     });
-//     muhData = this.state.body
-//     console.log(muhData)
-//     // open the request with the verb and the url
-//     xhr.open(this.state.picked, this.state.url);
-//     // send the request
-//     xhr.send();
-//   };
-  
   postData = ()=> {
     console.time('init')
     // Example POST method implementation:
