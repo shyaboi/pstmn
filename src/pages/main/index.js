@@ -135,7 +135,7 @@ urlChange = (e) => {
                 <FormControl
                   id="basic-url"
                   aria-describedby="basic-addon3"
-                  placeholder="https://openflags.net/api/usa/california"
+                  placeholder="https://openflags.net/api/json/flagInfo/usa/california"
                   defaultValue=''
                   onChange={this.urlChange} 
                 />
