@@ -55,8 +55,8 @@ urlChange = (e) => {
       const response = await fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'omit', // include, *same-origin, omit
         headers: {
           'Content-Type': 'application/json'
           // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -135,7 +135,7 @@ urlChange = (e) => {
                 <FormControl
                   id="basic-url"
                   aria-describedby="basic-addon3"
-                  placeholder="https://openflags.net/api/json/flagInfo/usa/california"
+                  placeholder="Example: https://openflags.net/api/json/ISO3166/US-OR"
                   defaultValue=''
                   onChange={this.urlChange} 
                 />
