@@ -70,7 +70,7 @@ urlChange = (e) => {
 
   
     
-    postData('https://getwomanserver.herokuapp.com/', { body: this.state })
+    postData('http://localhost:4444', { body: this.state })
     .then(data => {
       const dataType = typeof(data)
       if(typeof(data)==='string'){
